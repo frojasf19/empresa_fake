@@ -28,10 +28,21 @@ routerLimpieza.get('/:sexo/:edad', (req, res)=>{
 })
 
 routerLimpieza.post('/', (req, res)=>{
-    const ne = req.body
-    if(ne.id == undefined || ne.nombre == undefined || ne.edad == undefined || ne.sexo == undefined || ne.correo == undefined) return res.status(404).json('No se pudo registrar al nuevo empleado')
-    limpieza.push(ne)
+    const nE = req.body
+    if(nE.id == undefined || nE.nombre == undefined || nE.edad == undefined || nE.sexo == undefined || nE.correo == undefined) return res.status(404).json('No se pudo registrar al nuevo empleado')
+    limpieza.push(nE)
     return res.status(200).json('Empleado registrado con exito')
+})
+
+routerLimpieza.put('/:id', (req, res)=>{
+    const eA = req.body
+    const id = req.params.id
+    if(eA.nombre === undefined || eA.edad === undefined || eA.sexo === undefined || eA.correo === undefined) return res.status(404).json('No se pudo actualizar los datos')
+    const empl = limpieza.findIndex(e => e.id == id)
+    if(empl >= 0){
+        limpieza[empl] = eA
+    }
+    res.status(200).json(limpieza)
 })
 
 module.exports = routerLimpieza
