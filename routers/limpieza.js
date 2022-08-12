@@ -27,4 +27,11 @@ routerLimpieza.get('/:sexo/:edad', (req, res)=>{
     return res.status(200).json(resp)
 })
 
+routerLimpieza.post('/', (req, res)=>{
+    const ne = req.body
+    if(ne.id == undefined || ne.nombre == undefined || ne.edad == undefined || ne.sexo == undefined || ne.correo == undefined) return res.status(404).json('No se pudo registrar al nuevo empleado')
+    limpieza.push(ne)
+    return res.status(200).json('Empleado registrado con exito')
+})
+
 module.exports = routerLimpieza
