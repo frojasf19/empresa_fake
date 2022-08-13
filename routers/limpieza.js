@@ -42,6 +42,14 @@ routerLimpieza.put('/:id', (req, res)=>{
     if(empl >= 0){
         limpieza[empl] = eA
     }
+    res.status(200).json('Empleado actualizado con exito')
+})
+
+routerLimpieza.delete('/:id', (req, res)=>{
+    const id = req.params.id
+    const existe = limpieza.find(e => e.id == id)
+    if(existe === undefined) return res.status(404).json('No se encontro al empleado')
+    limpieza.splice(id - 1, 1)
     res.status(200).json(limpieza)
 })
 
